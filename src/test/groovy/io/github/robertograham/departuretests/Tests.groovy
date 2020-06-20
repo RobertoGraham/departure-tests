@@ -1,7 +1,7 @@
 package io.github.robertograham.departuretests
 
 import geb.spock.GebSpec
-import io.github.robertograham.departuretests.page.BusStops
+import io.github.robertograham.departuretests.page.Index
 import org.mockserver.client.MockServerClient
 import org.mockserver.model.JsonBody
 import org.testcontainers.containers.GenericContainer
@@ -27,27 +27,27 @@ final class Tests extends GebSpec {
 
     @Shared
     private MockServerContainer mockServerContainer = new MockServerContainer()
-            .withNetworkAliases('transport-api')
+            .tap { networkAliases = ['transport-api'] }
             .withNetwork(network)
 
     @Shared
     private GenericContainer departureApiContainer = new GenericContainer('docker.pkg.github.com/robertograham/departure-api/departure-api')
             .waitingFor(forLogMessage('.*Started DepartureApiApplication.*', 1))
+            .tap { networkAliases = ['departure-api'] }
             .withNetwork(network)
-            .withNetworkAliases('departure-api')
             .withExposedPorts(8080)
-            .withEnv('TRANSPORT_API_CLIENT_URL', "http://${mockServerContainer.networkAliases[1]}:${mockServerContainer.exposedPorts.first()}")
+            .withEnv('TRANSPORT_API_CLIENT_URL', "http://${mockServerContainer.networkAliases.first()}:${mockServerContainer.exposedPorts.first()}")
 
     @Shared
     private GenericContainer departureAppContainer = new GenericContainer('docker.pkg.github.com/robertograham/departure-app/departure-app')
             .waitingFor(forHttp('/'))
+            .tap { networkAliases = [config.rawConfig.departureAppNetworkAlias as String] }
             .withNetwork(network)
-            .withNetworkAliases(config.rawConfig.departureAppNetworkAlias as String)
             .withExposedPorts(80)
-            .withEnv('DEPARTURE_API_URL', "http://${departureApiContainer.networkAliases[1]}:${departureApiContainer.exposedPorts.first()}")
+            .withEnv('DEPARTURE_API_URL', "http://${departureApiContainer.networkAliases.first()}:${departureApiContainer.exposedPorts.first()}")
 
     def setup() {
-        browser.setBaseUrl("http://${departureAppContainer.networkAliases[1]}:${departureAppContainer.exposedPorts.first()}/")
+        browser.setBaseUrl("http://${departureAppContainer.networkAliases.first()}:${departureAppContainer.exposedPorts.first()}/")
         new MockServerClient(mockServerContainer.host, mockServerContainer.serverPort)
                 .when(request('/places.json').withQueryStringParameters(lat: ['[-+]?[0-9]*\\.?[0-9]+'],
                         lon: ['[-+]?[0-9]*\\.?[0-9]+'],
@@ -69,9 +69,11 @@ final class Tests extends GebSpec {
 
     def 'test'() {
         given:
-        final def busStops = to BusStops
+        final def index = to Index
 
         expect:
-        busStops.title == 'Departure App'
+        at index, {
+            busStops.first().id == 'atcocode'
+        }
     }
 }
