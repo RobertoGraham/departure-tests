@@ -8,6 +8,7 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.MockServerContainer
 import org.testcontainers.containers.Network
 import org.testcontainers.spock.Testcontainers
+import org.testcontainers.utility.DockerImageName
 import spock.lang.Shared
 
 import java.time.ZonedDateTime
@@ -26,12 +27,13 @@ final class Tests extends GebSpec {
     private def network = config.rawConfig.network as Network
 
     @Shared
-    private MockServerContainer mockServerContainer = new MockServerContainer()
+    private MockServerContainer mockServerContainer = new MockServerContainer(DockerImageName.parse('mockserver/mockserver')
+            .withTag('mockserver-5.11.2'))
             .tap { networkAliases = ['transport-api'] }
             .withNetwork(network)
 
     @Shared
-    private GenericContainer departureApiContainer = new GenericContainer('docker.pkg.github.com/robertograham/departure-api/departure-api')
+    private GenericContainer departureApiContainer = new GenericContainer('ghcr.io/robertograham/departure-api:latest')
             .waitingFor(forLogMessage('.*Started DepartureApiApplication.*', 1))
             .tap { networkAliases = ['departure-api'] }
             .withNetwork(network)
@@ -39,7 +41,7 @@ final class Tests extends GebSpec {
             .withEnv('TRANSPORT_API_CLIENT_URL', "http://${mockServerContainer.networkAliases.first()}:${mockServerContainer.exposedPorts.first()}")
 
     @Shared
-    private GenericContainer departureAppContainer = new GenericContainer('docker.pkg.github.com/robertograham/departure-app/departure-app')
+    private GenericContainer departureAppContainer = new GenericContainer('ghcr.io/robertograham/departure-app:latest')
             .waitingFor(forHttp('/'))
             .tap { networkAliases = [config.rawConfig.departureAppNetworkAlias as String] }
             .withNetwork(network)
