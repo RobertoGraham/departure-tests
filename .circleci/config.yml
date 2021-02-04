@@ -1,21 +1,11 @@
 version: 2.1
-commands:
-  setup-remote-docker:
-    steps:
-      - setup_remote_docker:
-          version: 19.03.13
-
-executors:
-  docker:
-    docker:
-      - image: docker:19.03.13-git
 
 jobs:
   run-tests:
-    executor: docker
+    machine:
+      image: ubuntu-2004:202101-01
     steps:
       - checkout
-      - setup-remote-docker
       - run: |
           docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock maven:3.6.3-openjdk-15-slim mvn -e -B test
           mkdir ~/test-results
@@ -23,12 +13,14 @@ jobs:
       - store_test_results:
           path: ~/test-results
   publish-docker-image:
-    executor: docker
+    docker:
+      - image: docker:19.03.13-git
     environment:
       IMAGE_TAG: ghcr.io/robertograham/departure-tests:latest
     steps:
       - checkout
-      - setup-remote-docker
+      - setup_remote_docker:
+          version: 19.03.13
       - run: |
           docker login ghcr.io -u RobertoGraham -p $PERSONAL_ACCESS_TOKEN
           docker build -t $IMAGE_TAG .

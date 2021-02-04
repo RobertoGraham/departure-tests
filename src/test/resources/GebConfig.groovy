@@ -15,6 +15,5 @@ driver = {
             .withNetwork(network as Network)
             .tap {
                 start()
-                println vncAddress
             }.webDriver
 }
