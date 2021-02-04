@@ -1,0 +1,9 @@
+.idea
+target
+.dockerignore
+.gitignore
+*.iml
+Dockerfile
+.circleci
+.github
+.DS_Store
