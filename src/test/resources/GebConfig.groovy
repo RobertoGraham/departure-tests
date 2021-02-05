@@ -4,6 +4,8 @@ import org.testcontainers.containers.Network
 
 departureAppNetworkAlias = 'departure-app'
 
+baseUrl = "http://$departureAppNetworkAlias/"
+
 network = Network.newNetwork()
 
 driver = {
