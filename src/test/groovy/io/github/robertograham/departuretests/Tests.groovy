@@ -141,7 +141,18 @@ final class Tests extends GebSpec {
   ]
 }'''))
                         .withHeader(CONTENT_TYPE, JSON_UTF_8 as String))
-
+        mockServerClient.when(request('/places.json').withQueryStringParameters(query: ['notFound'],
+                type: ['bus_stop'],
+                app_key: ['transportApiApplicationKey'],
+                app_id: ['transportApiApplicationId']))
+                .respond(response().withBody(JsonBody.json('''\
+{
+  "request_time": "2021-02-10T00:20:47+00:00",
+  "source": "",
+  "acknowledgements": "",
+  "member": []
+}'''))
+                        .withHeader(CONTENT_TYPE, JSON_UTF_8 as String))
     }
 
     def 'view departures from index page'() {
@@ -186,6 +197,15 @@ final class Tests extends GebSpec {
                     destination == 'Stockport'
                 }
             }
+        }
+    }
+
+    def 'bus stop not found'() {
+        expect: 'bus stop page shown with the correct details'
+        verifyAll at(to(BusStopPage, 'notFound', 'departures')), {
+            name == 'No bus stop found with id: notFound'
+            !locality
+            lines.empty
         }
     }
 }
