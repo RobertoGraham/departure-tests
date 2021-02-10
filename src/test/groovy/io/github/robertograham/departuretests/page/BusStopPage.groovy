@@ -12,7 +12,7 @@ final class BusStopPage extends Page {
 
     static at = {
         waitFor {
-            !lines.empty
+            !name?.empty
         }
     }
 }
