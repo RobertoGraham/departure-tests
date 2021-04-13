@@ -16,7 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>13</java.version>
         <groovy.version>2.5.14</groovy.version>
-        <geb.version>4.0</geb.version>
+        <geb.version>4.1</geb.version>
         <junit-vintage-engine.version>5.7.1</junit-vintage-engine.version>
         <mockserver.version>5.11.2</mockserver.version>
         <selenium.version>3.141.59</selenium.version>
