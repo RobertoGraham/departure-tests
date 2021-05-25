@@ -15,14 +15,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>13</java.version>
-        <groovy.version>2.5.14</groovy.version>
-        <geb.version>4.0</geb.version>
-        <junit-vintage-engine.version>5.7.1</junit-vintage-engine.version>
+        <geb.version>5.0-milestone-2</geb.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <mockserver.version>5.11.2</mockserver.version>
         <selenium.version>3.141.59</selenium.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spock.version>1.3-groovy-2.5</spock.version>
-        <testcontainers.version>1.15.2</testcontainers.version>
+        <spock.version>2.0-groovy-3.0</spock.version>
+        <testcontainers.version>1.15.3</testcontainers.version>
         <gmavenplus-plugin.version>1.12.1</gmavenplus-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
@@ -41,14 +40,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
@@ -110,9 +101,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit-vintage-engine.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

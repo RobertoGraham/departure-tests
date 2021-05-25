@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock maven:3.6.3-openjdk-15-slim mvn -e -B test
+          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock maven:3.8.1-openjdk-16-slim mvn -e -B test
           mkdir ~/test-results
           cp -r ./target/surefire-reports ~/test-results/spock
       - store_test_results:
