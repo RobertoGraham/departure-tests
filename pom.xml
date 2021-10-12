@@ -14,7 +14,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>13</java.version>
+        <java.version>17</java.version>
         <geb.version>5.0</geb.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
         <mockserver.version>5.11.2</mockserver.version>
@@ -24,7 +24,7 @@
         <testcontainers.version>1.16.0</testcontainers.version>
         <gmavenplus-plugin.version>1.13.0</gmavenplus-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
