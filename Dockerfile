@@ -1,4 +1,4 @@
-FROM maven:3.8.3-openjdk-17-slim
+FROM maven:3.8.4-openjdk-17-slim
 LABEL org.opencontainers.image.source=https://github.com/robertograham/departure-tests
 WORKDIR /src
 COPY pom.xml .
