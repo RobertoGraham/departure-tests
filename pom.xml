@@ -21,7 +21,7 @@
         <selenium.version>3.141.59</selenium.version>
         <slf4j.version>1.7.33</slf4j.version>
         <spock.version>2.0-groovy-3.0</spock.version>
-        <testcontainers.version>1.16.2</testcontainers.version>
+        <testcontainers.version>1.16.3</testcontainers.version>
         <gmavenplus-plugin.version>1.13.1</gmavenplus-plugin.version>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
