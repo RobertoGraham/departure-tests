@@ -7,11 +7,13 @@ jobs:
     steps:
       - checkout
       - run: |
-          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock maven:3.8.3-openjdk-17-slim mvn -e -B test
-          mkdir ~/test-results
-          cp -r ./target/surefire-reports ~/test-results/spock
+          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock azul/zulu-openjdk-alpine:17.0.1-17.30.15-jre-headless ./gradlew test
+          mkdir -p ~/test-results/junit/
+          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
       - store_test_results:
           path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
   publish-docker-image:
     docker:
       - image: docker:20.10.7-git
