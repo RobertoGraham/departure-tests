@@ -10,9 +10,7 @@ network = Network.newNetwork()
 
 driver = {
     new BrowserWebDriverContainer<>()
-            .withCapabilities(new ChromeOptions().tap {
-                args = ["--unsafely-treat-insecure-origin-as-secure=http://$departureAppNetworkAlias/"]
-            })
+            .withCapabilities(new ChromeOptions().addArguments("--unsafely-treat-insecure-origin-as-secure=$baseUrl"))
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
             .withNetwork(network as Network)
             .tap {
