@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/places.json",
+    "queryParameters": {
+      "query": {
+        "equalTo": "notFound"
+      },
+      "type": {
+        "equalTo": "bus_stop"
+      },
+      "app_key": {
+        "equalTo": "transportApiApplicationKey"
+      },
+      "app_id": {
+        "equalTo": "transportApiApplicationId"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "request_time": "2021-02-10T00:20:47+00:00",
+      "source": "",
+      "acknowledgements": "",
+      "member": []
+    }
+  }
+}

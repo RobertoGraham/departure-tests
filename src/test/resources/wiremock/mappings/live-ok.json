@@ -1,0 +1,66 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/bus/stop/1800SG08021/live.json",
+    "queryParameters": {
+      "group": {
+        "equalTo": "no"
+      },
+      "limit": {
+        "equalTo": "300"
+      },
+      "nextbuses": {
+        "equalTo": "no"
+      },
+      "app_key": {
+        "equalTo": "transportApiApplicationKey"
+      },
+      "app_id": {
+        "equalTo": "transportApiApplicationId"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "atcocode": "1800SG08021",
+      "smscode": "MANJAWMP",
+      "request_time": "2021-02-04T23:04:24+00:00",
+      "name": "Beechurst Road",
+      "stop_name": "Beechurst Road",
+      "bearing": "S",
+      "indicator": "opp",
+      "locality": "Adswood",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -2.18307,
+          53.39014
+        ]
+      },
+      "departures": {
+        "all": [
+          {
+            "mode": "bus",
+            "line": "328",
+            "line_name": "328",
+            "direction": "Stockport",
+            "operator": "SCMN",
+            "operator_name": "Stagecoach Greater Manchester",
+            "date": "2021-02-04",
+            "aimed_departure_time": "23:09",
+            "expected_departure_date": null,
+            "expected_departure_time": null,
+            "best_departure_estimate": "23:09",
+            "dir": "outbound",
+            "id": "https://transportapi.com/v3/uk/bus/route/SCMN/328/outbound/1800SG08021/2021-02-04/23:09/timetable.json?app_id=transportApiApplicationId&app_key=transportApiApplicationKey",
+            "source": "tnds timetable (nextbuses disabled)"
+          }
+        ]
+      }
+    }
+  }
+}

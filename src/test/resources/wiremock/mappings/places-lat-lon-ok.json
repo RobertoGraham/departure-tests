@@ -1,0 +1,46 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/places.json",
+    "queryParameters": {
+      "lat": {
+        "matches": "^[-+]?[0-9]*\\.?[0-9]+$"
+      },
+      "lon": {
+        "matches": "^[-+]?[0-9]*\\.?[0-9]+$"
+      },
+      "type": {
+        "equalTo": "bus_stop"
+      },
+      "app_key": {
+        "equalTo": "transportApiApplicationKey"
+      },
+      "app_id": {
+        "equalTo": "transportApiApplicationId"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "request_time": "2021-02-04T23:20:26+00:00",
+      "source": "NaPTAN",
+      "acknowledgements": "Contains DfT NaPTAN bus stops data",
+      "member": [
+        {
+          "type": "bus_stop",
+          "name": "Beechurst Road - S-bound",
+          "latitude": 53.39014,
+          "longitude": -2.18307,
+          "accuracy": 20,
+          "atcocode": "1800SG08021",
+          "description": "Adswood",
+          "distance": 0
+        }
+      ]
+    }
+  }
+}
