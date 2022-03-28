@@ -18,7 +18,7 @@ dependencies {
     testImplementation(platform("org.testcontainers:testcontainers-bom:1.16.3"))
     testImplementation("org.testcontainers:spock")
     testImplementation("org.testcontainers:selenium")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.1")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.3")
     testImplementation("org.seleniumhq.selenium:selenium-support:4.1.1")
     testImplementation("org.slf4j:slf4j-simple:1.7.33")
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
