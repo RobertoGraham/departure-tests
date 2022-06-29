@@ -15,7 +15,7 @@ repositories {
 dependencies {
     testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
     testImplementation("org.gebish:geb-spock:5.1")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.16.3"))
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.17.3"))
     testImplementation("org.testcontainers:spock")
     testImplementation("org.testcontainers:selenium")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.1")
