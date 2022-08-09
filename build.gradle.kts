@@ -19,7 +19,7 @@ dependencies {
     testImplementation("org.testcontainers:spock")
     testImplementation("org.testcontainers:selenium")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.1")
-    testImplementation("org.seleniumhq.selenium:selenium-support:4.1.1")
+    testImplementation("org.seleniumhq.selenium:selenium-support:4.4.0")
     testImplementation("org.slf4j:slf4j-simple:1.7.33")
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
