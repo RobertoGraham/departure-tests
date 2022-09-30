@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
+    testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
     testImplementation("org.gebish:geb-spock:5.1")
     testImplementation(platform("org.testcontainers:testcontainers-bom:1.16.3"))
     testImplementation("org.testcontainers:spock")
