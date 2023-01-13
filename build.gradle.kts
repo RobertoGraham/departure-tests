@@ -6,7 +6,7 @@ plugins {
 group = "io.github.robertograham"
 version = "1.0-SNAPSHOT"
 description = "Departure Tests"
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_19
 
 repositories {
     mavenCentral()
