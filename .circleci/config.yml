@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock azul/zulu-openjdk:19.0.1-19.30.11 ./gradlew test
+          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock azul/zulu-openjdk:17.0.5-17.38.21 ./gradlew test
           mkdir -p ~/test-results/junit/
           find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
       - store_test_results:
