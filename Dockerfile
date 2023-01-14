@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:17.0.5-17.38.21
+FROM mcr.microsoft.com/playwright/java:v1.28.1-focal
 LABEL org.opencontainers.image.source=https://github.com/robertograham/departure-tests
 WORKDIR /src
 COPY . .
