@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   run-tests:
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2204:2022.10.2
     steps:
       - checkout
       - run: |
-          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock azul/zulu-openjdk:17.0.5-17.38.21 ./gradlew test
+          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock azul/zulu-openjdk:17.0.5-17.38.21 ./gradlew test --debug
           mkdir -p ~/test-results/junit/
           find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
       - store_test_results:
@@ -16,13 +16,13 @@ jobs:
           path: ~/test-results/junit
   publish-docker-image:
     docker:
-      - image: docker:20.10.7-git
+      - image: docker:20.10.18-git
     environment:
       IMAGE_TAG: ghcr.io/robertograham/departure-tests:latest
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.7
+          version: 20.10.18
       - run: |
           docker login ghcr.io -u RobertoGraham -p $PERSONAL_ACCESS_TOKEN
           docker build -t $IMAGE_TAG .
