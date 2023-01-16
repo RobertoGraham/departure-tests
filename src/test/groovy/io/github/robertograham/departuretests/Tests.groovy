@@ -43,7 +43,7 @@ final class Tests extends Specification {
 
     private static final def PLAYWRIGHT = Playwright.create()
 
-    private static final def BROWSER = PLAYWRIGHT.chromium()
+    private static final def BROWSER = PLAYWRIGHT.firefox()
             .launch()
 
     private def browserContext = BROWSER.newContext(new Browser.NewContextOptions(baseURL: "http://$DEPARTURE_APP.host:$DEPARTURE_APP.firstMappedPort/",

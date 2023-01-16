@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock -u pwuser mcr.microsoft.com/playwright/java:v1.28.1-focal ./gradlew test --debug
+          docker run -it --rm -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock mcr.microsoft.com/playwright/java:v1.28.1-focal ./gradlew test --debug
           mkdir -p ~/test-results/junit/
           find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
       - store_test_results:
