@@ -1,6 +1,7 @@
 package io.github.robertograham.departuretests
 
 import com.microsoft.playwright.Browser
+import com.microsoft.playwright.BrowserType
 import com.microsoft.playwright.Playwright
 import com.microsoft.playwright.options.Geolocation
 import io.github.robertograham.departuretests.page.BusStopPage
@@ -41,12 +42,14 @@ final class Tests extends Specification {
             .withEnv('DEPARTURE_API_URL', "http://${DEPARTURE_API.networkAliases.first()}:${DEPARTURE_API.exposedPorts.first()}" as String)
             .tap { start() }
 
+    private static final String BASE_URL = "http://$DEPARTURE_APP.host:$DEPARTURE_APP.firstMappedPort/"
+
     private static final def PLAYWRIGHT = Playwright.create()
 
-    private static final def BROWSER = PLAYWRIGHT.firefox()
-            .launch()
+    private static final def BROWSER = PLAYWRIGHT.chromium()
+            .launch(new BrowserType.LaunchOptions(args: ["--unsafely-treat-insecure-origin-as-secure=$BASE_URL" as String]))
 
-    private def browserContext = BROWSER.newContext(new Browser.NewContextOptions(baseURL: "http://$DEPARTURE_APP.host:$DEPARTURE_APP.firstMappedPort/",
+    private def browserContext = BROWSER.newContext(new Browser.NewContextOptions(baseURL: BASE_URL,
             permissions: ['geolocation'],
             geolocation: new Geolocation(1.0, 1.0),
             locale: 'en-GB',
