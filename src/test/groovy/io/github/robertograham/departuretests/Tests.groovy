@@ -58,6 +58,10 @@ final class Tests extends Specification {
                 onConsoleMessage { System.out.println it.text() }
             }
 
+    def setup() {
+        println BASE_URL
+    }
+
     def cleanup() {
         browserContext.close()
     }
