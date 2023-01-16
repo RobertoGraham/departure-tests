@@ -21,7 +21,6 @@ final class Tests extends Specification {
     private static final GenericContainer TRANSPORT_API = new GenericContainer('wiremock/wiremock:2.32.0-alpine')
             .withExposedPorts(8080)
             .withNetwork(NETWORK)
-            .withNetworkAliases('transport-api')
             .withCopyFileToContainer(MountableFile.forClasspathResource('wiremock/mappings'), '/home/wiremock/mappings')
             .tap { start() }
 
@@ -29,7 +28,6 @@ final class Tests extends Specification {
             .waitingFor(forLogMessage('.*Started DepartureApiApplication.*', 1))
             .withExposedPorts(8080)
             .withNetwork(NETWORK)
-            .withNetworkAliases('departure-api')
             .withEnv([TRANSPORT_API_CLIENT_URL            : "http://${TRANSPORT_API.networkAliases.first()}:${TRANSPORT_API.exposedPorts.first()}" as String,
                       TRANSPORT_API_CLIENT_APPLICATION_ID : 'transportApiApplicationId',
                       TRANSPORT_API_CLIENT_APPLICATION_KEY: 'transportApiApplicationKey'])
