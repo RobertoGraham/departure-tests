@@ -56,6 +56,9 @@ final class Tests extends Specification {
             timezoneId: 'Europe/London'))
 
     private def page = browserContext.newPage()
+            .tap {
+                onConsoleMessage { System.out.println it.text() }
+            }
 
     def cleanup() {
         browserContext.close()
