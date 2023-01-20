@@ -5,8 +5,8 @@ import geb.Module
 final class LineCard extends Module {
 
     static content = {
-        name { $('h2').text() }
-        operator { $('h3').text() }
+        name { $('h3').text() }
+        operator { $('h4').text() }
         departures { $('ul li').moduleList Departure }
     }
 }
