@@ -1,18 +1,34 @@
 package io.github.robertograham.departuretests.page
 
-import geb.Page
+import com.microsoft.playwright.Locator
+import com.microsoft.playwright.Page
+import com.microsoft.playwright.options.AriaRole
 
-final class Index extends Page {
+final class Index {
 
-    static url = ''
+    private final Page page
+    private final Locator busStopPageLinks
 
-    static content = {
-        busStops { $('div', class: 'mdc-card').moduleList BusStopCard }
+    Index(final Page page) {
+        this.page = page
+        busStopPageLinks = page.getByRole(AriaRole.LINK)
     }
 
-    static at = {
-        waitFor {
-            !busStops.empty
-        }
+    void navigate() {
+        page.navigate ''
+        page.evaluate('''\
+navigator.geolocation.getCurrentPosition = function (success, error) {
+  success({
+    coords: {
+      longitude: 1.0,
+      latitude: 1.0
+    }
+  });
+}(pos => {})''')
+        busStopPageLinks.waitFor()
+    }
+
+    List<BusStopCard> getBusStops() {
+        (0..<busStopPageLinks.count()).collect { new BusStopCard(busStopPageLinks.nth(it)) }
     }
 }
