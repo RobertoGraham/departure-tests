@@ -16,6 +16,15 @@ final class Index {
 
     void navigate() {
         page.navigate ''
+        page.evaluate('''\
+navigator.geolocation.getCurrentPosition = function (success, error) {
+  success({
+    coords: {
+      longitude: 1.0,
+      latitude: 1.0
+    }
+  });
+}(pos => {})''')
         busStopPageLinks.waitFor()
     }
 

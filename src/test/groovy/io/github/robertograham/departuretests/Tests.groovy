@@ -40,7 +40,7 @@ final class Tests extends Specification {
             .withEnv('DEPARTURE_API_URL', "http://${DEPARTURE_API.networkAliases.first()}:${DEPARTURE_API.exposedPorts.first()}" as String)
             .tap { start() }
 
-    private static final String BASE_URL = "http://$DEPARTURE_APP.host:$DEPARTURE_APP.firstMappedPort/"
+    private static final String BASE_URL = "http://$DEPARTURE_APP.host:$DEPARTURE_APP.firstMappedPort"
 
     private static final def PLAYWRIGHT = Playwright.create()
 
@@ -54,13 +54,6 @@ final class Tests extends Specification {
             timezoneId: 'Europe/London'))
 
     private def page = browserContext.newPage()
-            .tap {
-                onConsoleMessage { System.out.println it.text() }
-            }
-
-    def setup() {
-        println BASE_URL
-    }
 
     def cleanup() {
         browserContext.close()
